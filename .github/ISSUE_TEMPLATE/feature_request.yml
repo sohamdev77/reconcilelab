@@ -1,0 +1,10 @@
+name: Feature request
+description: Propose a bounded, testable extension
+labels: [feature]
+body:
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Problem, proposed behavior and acceptance tests
+    validations:
+      required: true

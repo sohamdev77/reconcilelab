@@ -1,0 +1,42 @@
+apiVersion: reconcilelab/v1alpha1
+adapter: buggy
+seed: 42
+initial:
+  - apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: demo
+      namespace: default
+      labels:
+        owner: reconcilelab
+    data:
+      ready: "true"
+actions:
+  - kind: reconcile
+    name: demo
+    namespace: default
+  - kind: freeze
+  - kind: mutate
+    object:
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: demo
+        namespace: default
+        labels:
+          owner: another-controller
+      data:
+        ready: "false"
+  - kind: reconcile
+    name: demo
+    namespace: default
+  - kind: inject
+    operation: update
+    error: conflict
+  - kind: sync
+  - kind: reconcile
+    name: demo
+    namespace: default
+  - kind: reconcile
+    name: demo
+    namespace: default

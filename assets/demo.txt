@@ -1,0 +1,33 @@
+$ reconcilelab version
+0.1.0-dev
+[exit 0]
+
+$ reconcilelab test examples/basic-controller --output results/demo-buggy
+ReconcileLab 0.1.0-dev | local simulation
+Seed: 42 | Adapter: buggy
+VIOLATION DETECTED: ResourceOwnershipPreserved
+Executed: 2 actions | API operations: 3
+Minimized: 7 -> 2 actions (replay verified)
+Saved: results/demo-buggy/run.json
+Reproduce: reconcilelab replay results/demo-buggy/counterexample.yaml
+invariant violated: ResourceOwnershipPreserved
+[exit 1]
+
+$ reconcilelab replay results/demo-buggy/counterexample.yaml --output results/demo-replay
+ReconcileLab 0.1.0-dev | local simulation
+Seed: 42 | Adapter: buggy
+VIOLATION DETECTED: ResourceOwnershipPreserved
+Executed: 2 actions | API operations: 3
+Minimized: 2 -> 2 actions (replay verified)
+Saved: results/demo-replay/run.json
+Reproduce: reconcilelab replay results/demo-replay/counterexample.yaml
+invariant violated: ResourceOwnershipPreserved
+[exit 1]
+
+$ reconcilelab replay results/demo-buggy/counterexample.yaml --adapter fixed --output results/demo-fixed
+ReconcileLab 0.1.0-dev | local simulation
+Seed: 42 | Adapter: fixed
+PASS
+Executed: 2 actions | API operations: 2
+Saved: results/demo-fixed/run.json
+[exit 0]

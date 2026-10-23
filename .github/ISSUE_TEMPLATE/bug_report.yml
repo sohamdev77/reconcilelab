@@ -1,0 +1,15 @@
+name: Bug report
+description: Report a reproducible simulator or controller-testing defect
+labels: [bug]
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction and expected behavior
+      description: Include synthetic scenario, version, adapter contract and actual output. Do not share private data.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Go version and operating system
